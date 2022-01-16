@@ -1,7 +1,15 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import { useState } from "react";
-import { Container, Heading, Paragraph, Flex, Input } from "theme-ui";
+import {
+  Container,
+  Heading,
+  Paragraph,
+  Flex,
+  Input,
+  Box,
+  Link,
+} from "theme-ui";
 
 import { GetStaticProps, GetStaticPropsContext } from "next";
 
@@ -14,7 +22,10 @@ const Home: NextPage<HomeProps> = (props) => {
   const [btc, setBtc] = useState(100);
 
   const [hashRate, setHashRate] = useState(props.hashRate);
-  const fractionOfSupply = btc / props.totalSupply;
+
+  const [lostCoins, setLostCoins] = useState(3000000);
+
+  const fractionOfSupply = btc / (props.totalSupply - lostCoins);
   const percentOfSupply = fractionOfSupply * 100;
   return (
     <>
@@ -37,6 +48,17 @@ const Home: NextPage<HomeProps> = (props) => {
       {/* <Paragraph sx={{ pb: 20 }}>
         This is a demo, the calculations are not yet accurate
       </Paragraph> */}
+      <Paragraph sx={{ my: 20 }}>
+        What is this? Read the{" "}
+        <Link
+          target={"_blank"}
+          rel="noreferrer"
+          href="https://www.resistance.money/green/"
+        >
+          white paper
+        </Link>{" "}
+        at resistance.money to learn more.
+      </Paragraph>
       <Paragraph>Your BTC holdings:</Paragraph>
       <Flex sx={{ alignItems: "center", mb: 20 }}>
         <Input
@@ -51,74 +73,74 @@ const Home: NextPage<HomeProps> = (props) => {
         />
         <Paragraph ml={10}>BTC</Paragraph>
       </Flex>
-      <Paragraph>Current global hashrate:</Paragraph>
-      <Flex sx={{ alignItems: "center", mb: 20 }}>
-        {/* <Input
-          sx={{
-            width: 200,
-            mb: 20,
-          }}
-          type="number"
-          value={hashRate}
-          onChange={(e) => setHashRate(parseFloat(e.currentTarget.value))}
-        /> */}
-        <Paragraph>{props.hashRate.toLocaleString()} TH/s</Paragraph>
+      <Flex sx={{ mb: 20 }}>
+        <Box sx={{ mr: 20 }}>
+          <Paragraph>Total BTC supply:</Paragraph>
+          <Paragraph>{props.totalSupply.toLocaleString()}</Paragraph>
+        </Box>
+        <Box>
+          <Paragraph>Coins assumed lost:</Paragraph>
+          <Paragraph>{lostCoins.toLocaleString()}</Paragraph>
+        </Box>
       </Flex>
-      <Paragraph>You hold</Paragraph>
-      <Heading>
+      <Paragraph>Effective total BTC supply:</Paragraph>
+      <Heading sx={{ mb: 20 }}>
+        {(props.totalSupply - lostCoins).toLocaleString()}
+      </Heading>
+      <Paragraph>Of which you hold:</Paragraph>
+      <Heading sx={{ mb: 20 }}>
         <b>{percentOfSupply}%</b>
       </Heading>
-      <Paragraph>
-        of total Bitcoin supply ({props.totalSupply.toLocaleString()}). Making
-        you responsible for:
-      </Paragraph>
 
-      <Heading sx={{ mt: 20 }}>
-        {(hashRate * fractionOfSupply).toLocaleString()} TH/s
+      <Paragraph>Current global hashrate:</Paragraph>
+      <Heading>{props.hashRate.toLocaleString()} TH/s</Heading>
+      <Paragraph sx={{ mt: 20 }}>Your holdings incentivise:</Paragraph>
+      <Heading>
+        <b>{(hashRate * fractionOfSupply).toLocaleString()}</b> TH/s
       </Heading>
       <Paragraph>
         Or {((hashRate * fractionOfSupply) / 110).toFixed(1)} Antminer s19 Pros
         at 110 TH/s
       </Paragraph>
-      <Paragraph>
+      <Paragraph sx={{ mt: 20 }}>
         To ensure your BTC holdings are carbon neutral you can mine this amount
         or more with renewable energy, or purchase an equivalent Green
         Co-investment (GCI) instrument.
       </Paragraph>
       <Paragraph sx={{ fontSize: 1, mt: 30 }}>
         Built by{" "}
-        <a
+        <Link
           target={"_blank"}
           rel="noreferrer"
           href="http://twitter.com/islandHODL"
         >
           @islandHODL
-        </a>
+        </Link>
         <br />
         Inspired by{" "}
-        <a
+        <Link
           target={"_blank"}
           rel="noreferrer"
           href="https://twitter.com/thetrocro"
         >
           Troy Cross
-        </a>{" "}
+        </Link>{" "}
         &amp;{" "}
-        <a
+        <Link
           target={"_blank"}
           rel="noreferrer"
           href="https://twitter.com/resistancemoney"
         >
           Andrew M. Bailey
-        </a>{" "}
+        </Link>{" "}
         at{" "}
-        <a
+        <Link
           target={"_blank"}
           rel="noreferrer"
           href="https://www.resistance.money/green/"
         >
           Resistance.money
-        </a>
+        </Link>
       </Paragraph>
     </>
   );
