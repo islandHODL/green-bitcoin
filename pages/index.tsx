@@ -1,6 +1,8 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import { useState } from "react";
+
+import { addMonths } from "date-fns";
 import {
   Container,
   Heading,
@@ -12,6 +14,7 @@ import {
 } from "theme-ui";
 
 import { GetStaticProps, GetStaticPropsContext } from "next";
+import gciCalculator from "../utils/calculator";
 
 type HomeProps = {
   hashRate: number;
@@ -21,12 +24,23 @@ type HomeProps = {
 const Home: NextPage<HomeProps> = (props) => {
   const [btc, setBtc] = useState(100);
 
-  const [hashRate, setHashRate] = useState(props.hashRate);
+  // const [hashRate, setHashRate] = useState(props.hashRate);
 
-  const [lostCoins, setLostCoins] = useState(3000000);
+  // const [lostCoins, setLostCoins] = useState(3000000);
 
-  const fractionOfSupply = btc / (props.totalSupply - lostCoins);
-  const percentOfSupply = fractionOfSupply * 100;
+  const {
+    hashRateToMine,
+    percentOfSupply,
+    s19Count,
+    effectiveTotal,
+    s19Hashrate,
+    lostCoins,
+  } = gciCalculator({
+    btcHoldings: btc,
+    totalSupply: props.totalSupply,
+    hashRate: props.hashRate,
+  });
+
   return (
     <>
       <Head>
@@ -84,23 +98,21 @@ const Home: NextPage<HomeProps> = (props) => {
         </Box>
       </Flex>
       <Paragraph>Effective total BTC supply:</Paragraph>
-      <Heading sx={{ mb: 20 }}>
-        {(props.totalSupply - lostCoins).toLocaleString()}
-      </Heading>
+      <Heading sx={{ mb: 20 }}>{effectiveTotal.toLocaleString()}</Heading>
       <Paragraph>Of which you hold:</Paragraph>
       <Heading sx={{ mb: 20 }}>
         <b>{percentOfSupply}%</b>
       </Heading>
 
-      <Paragraph>Current global hashrate:</Paragraph>
+      <Paragraph>3 month average global hashrate:</Paragraph>
       <Heading>{props.hashRate.toLocaleString()} TH/s</Heading>
       <Paragraph sx={{ mt: 20 }}>Your holdings incentivise:</Paragraph>
       <Heading>
-        <b>{(hashRate * fractionOfSupply).toLocaleString()}</b> TH/s
+        <b>{hashRateToMine.toLocaleString()}</b> TH/s
       </Heading>
       <Paragraph>
-        Or {((hashRate * fractionOfSupply) / 110).toFixed(1)} Antminer s19 Pros
-        at 110 TH/s
+        Or {Math.round(s19Count).toLocaleString()} Antminer s19 Pros at{" "}
+        {s19Hashrate} TH/s
       </Paragraph>
       <Paragraph sx={{ mt: 20 }}>
         To ensure your BTC holdings are carbon neutral you can mine this amount
@@ -108,6 +120,15 @@ const Home: NextPage<HomeProps> = (props) => {
         Co-investment (GCI) instrument.
       </Paragraph>
       <Paragraph sx={{ fontSize: 1, mt: 30 }}>
+        Hashrate from{" "}
+        <Link
+          target={"_blank"}
+          rel="noreferrer"
+          href="http://twitter.com/glassnode"
+        >
+          @glassnode
+        </Link>
+        <br />
         Built by{" "}
         <Link
           target={"_blank"}
@@ -146,15 +167,47 @@ const Home: NextPage<HomeProps> = (props) => {
   );
 };
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
-  const getHashRate = await fetch("https://blockchain.info/q/hashrate");
+  if (!process.env.GLASSNODE_API_KEY)
+    return {
+      props: {
+        hashRate: 0,
+        totalSupply: 0,
+      },
+    };
+
+  const url = new URL(
+    "https://api.glassnode.com/v1/metrics/mining/hash_rate_mean"
+  );
+
+  const params = {
+    i: "1month",
+    a: "btc",
+    s: Math.round(addMonths(new Date(), -3).getTime() / 1000).toString(),
+    api_key: process.env.GLASSNODE_API_KEY,
+  };
+
+  url.search = new URLSearchParams(params).toString();
+
+  const getHashRate = await fetch(url.toString());
+
+  console.log(params.s);
+
   const hashRate = await getHashRate.json();
+
+  const averageHashRate = hashRate
+    ? (hashRate as any[])
+        .map((m) => m.v as number)
+        .reduce((partial_sum, a) => partial_sum + a, 0) / 3
+    : 0;
+
+  console.log(hashRate, averageHashRate);
 
   const getTotalSupply = await fetch("https://blockchain.info/q/totalbc");
   const totalSupply = await getTotalSupply.json();
 
   return {
     props: {
-      hashRate: hashRate ? hashRate / 1000 : 0,
+      hashRate: averageHashRate ? averageHashRate / 1000000000000 : 0,
       totalSupply: totalSupply ? totalSupply / 100000000 : 21000000,
     },
     revalidate: 20,
