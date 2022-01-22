@@ -49,19 +49,214 @@ const Home: NextPage<HomeProps> = (props) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Heading
-        sx={{
-          color: "primary",
-          fontFamily: "heading",
-          fontSize: "40px",
-          my: "5rem",
-        }}
-      >
-        Green your Bitcoin
-      </Heading>
-      {/* <Paragraph sx={{ pb: 20 }}>
-        This is a demo, the calculations are not yet accurate
-      </Paragraph> */}
+      <section className="max-w-4xl mx-auto text-gray-600 body-font overflow-hidden">
+        <div className="container px-5 py-24 mx-auto">
+          <div className="flex flex-col text-center w-full mb-20">
+            <h1 className="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">
+              Green your Bitcoin
+            </h1>
+            <p className="lg:w-2/3 mx-auto leading-relaxed text-base text-gray-500">
+              What is this? Read the{" "}
+              <a
+                target={"_blank"}
+                rel="noreferrer"
+                href="https://www.resistance.money/green/"
+              >
+                white paper
+              </a>{" "}
+              at resistance.money to learn more.
+            </p>
+            <div className="flex mx-auto border-2 border-teal-500 rounded overflow-hidden mt-6">
+              <button className="py-1 px-4 bg-teal-500 text-white focus:outline-none">
+                BTC
+              </button>
+              <button className="py-1 px-4 focus:outline-none">USD</button>
+            </div>
+          </div>
+          <div className="flex flex-wrap -m-4">
+            <div className="p-4 xl:w-1/2 md:w-1/2 w-full">
+              <div className="h-full p-6 rounded-lg border-2 border-teal-500 flex flex-col relative overflow-hidden">
+                <span className="bg-teal-500 text-white px-3 py-1 tracking-widest text-xs absolute right-0 top-0 rounded-bl">
+                  START HERE
+                </span>
+                <h2 className="text-sm tracking-widest title-font mb-1 font-medium">
+                  BITCOIN HOLDINGS
+                </h2>
+                <h1 className="text-5xl text-gray-900 leading-none flex items-center pb-4 mb-4 border-b border-gray-200">
+                  <input
+                    className="m-0 block w-full text-5xl text-gray-900  p-0 border-0  focus:ring-0 "
+                    type={"number"}
+                    value={btc}
+                    onChange={(e) => setBtc(parseFloat(e.currentTarget.value))}
+                  />
+                  {/* <span className="text-lg ml-1 font-normal text-gray-500">
+                    BTC
+                  </span> */}
+                </h1>
+                <p className="flex items-center text-gray-600 mb-2">
+                  <span className="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 text-white rounded-full flex-shrink-0">
+                    <svg
+                      fill="none"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2.5"
+                      className="w-3 h-3"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M20 6L9 17l-5-5"></path>
+                    </svg>
+                  </span>
+                  {props.totalSupply.toLocaleString()} BTC mined to date
+                </p>
+                <p className="flex items-center text-gray-600 mb-2">
+                  <span className="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 text-white rounded-full flex-shrink-0">
+                    <svg
+                      fill="none"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2.5"
+                      className="w-3 h-3"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M20 6L9 17l-5-5"></path>
+                    </svg>
+                  </span>
+                  {lostCoins.toLocaleString()} BTC assumed lost
+                </p>
+                <p className="flex items-center text-gray-600 mb-2">
+                  <span className="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 text-white rounded-full flex-shrink-0">
+                    <svg
+                      fill="none"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2.5"
+                      className="w-3 h-3"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M20 6L9 17l-5-5"></path>
+                    </svg>
+                  </span>
+                  {effectiveTotal.toLocaleString()} BTC effectively in supply
+                </p>
+                <p className="flex items-center text-gray-600 mb-6">
+                  <span className="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 text-white rounded-full flex-shrink-0">
+                    <svg
+                      fill="none"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2.5"
+                      className="w-3 h-3"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M20 6L9 17l-5-5"></path>
+                    </svg>
+                  </span>
+                  {percentOfSupply}% of supply
+                </p>
+              </div>
+            </div>
+            <div className="p-4 xl:w-1/2 md:w-1/2 w-full">
+              <div className="h-full p-6 rounded-lg border-2 border-gray-300 flex flex-col relative overflow-hidden">
+                <h2 className="text-sm tracking-widest title-font mb-1 font-medium">
+                  INCENTIVISED HASHRATE
+                </h2>
+                <h1 className="text-5xl text-gray-900 leading-none flex items-center pb-4 mb-4 border-b border-gray-200">
+                  <span>{Math.round(hashRateToMine).toLocaleString()}</span>
+                  <span className="text-lg ml-1 font-normal text-gray-500">
+                    TH/s
+                  </span>
+                </h1>
+                <p className="flex items-center text-gray-600 mb-2">
+                  <span className="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 text-white rounded-full flex-shrink-0">
+                    <svg
+                      fill="none"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2.5"
+                      className="w-3 h-3"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M20 6L9 17l-5-5"></path>
+                    </svg>
+                  </span>
+                  {props.hashRate.toLocaleString()} TH/s 90 day moving average
+                  of global hashrate
+                </p>
+                <p className="flex items-center text-gray-600 mb-2">
+                  <span className="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 text-white rounded-full flex-shrink-0">
+                    <svg
+                      fill="none"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2.5"
+                      className="w-3 h-3"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M20 6L9 17l-5-5"></path>
+                    </svg>
+                  </span>
+                  Tumeric plaid portland
+                </p>
+                <p className="flex items-center text-gray-600 mb-2">
+                  <span className="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 text-white rounded-full flex-shrink-0">
+                    <svg
+                      fill="none"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2.5"
+                      className="w-3 h-3"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M20 6L9 17l-5-5"></path>
+                    </svg>
+                  </span>
+                  Hexagon neutra unicorn
+                </p>
+                <p className="flex items-center text-gray-600 mb-2">
+                  <span className="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 text-white rounded-full flex-shrink-0">
+                    <svg
+                      fill="none"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2.5"
+                      className="w-3 h-3"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M20 6L9 17l-5-5"></path>
+                    </svg>
+                  </span>
+                  Vexillologist pitchfork
+                </p>
+                <p className="flex items-center text-gray-600 mb-6">
+                  <span className="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 text-white rounded-full flex-shrink-0">
+                    <svg
+                      fill="none"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2.5"
+                      className="w-3 h-3"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M20 6L9 17l-5-5"></path>
+                    </svg>
+                  </span>
+                  Mixtape chillwave tumeric
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <Paragraph sx={{ my: 20 }}>
         What is this? Read the{" "}
         <Link
@@ -195,9 +390,11 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   const hashRate = await getHashRate.json();
 
   const averageHashRate = hashRate
-    ? (hashRate as any[])
-        .map((m) => m.v as number)
-        .reduce((partial_sum, a) => partial_sum + a, 0) / 3
+    ? Math.round(
+        (hashRate as any[])
+          .map((m) => m.v as number)
+          .reduce((partial_sum, a) => partial_sum + a, 0) / 3
+      )
     : 0;
 
   console.log(hashRate, averageHashRate);
@@ -207,7 +404,9 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
 
   return {
     props: {
-      hashRate: averageHashRate ? averageHashRate / 1000000000000 : 0,
+      hashRate: averageHashRate
+        ? Math.round(averageHashRate / 1000000000000)
+        : 0,
       totalSupply: totalSupply ? totalSupply / 100000000 : 21000000,
     },
     revalidate: 20,
