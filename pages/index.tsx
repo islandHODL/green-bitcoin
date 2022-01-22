@@ -11,6 +11,7 @@ import {
   Input,
   Box,
   Link,
+  Card,
 } from "theme-ui";
 
 import { GetStaticProps, GetStaticPropsContext } from "next";
@@ -54,7 +55,9 @@ const Home: NextPage<HomeProps> = (props) => {
           color: "primary",
           fontFamily: "heading",
           fontSize: "40px",
-          my: "5rem",
+          my: "4rem",
+          mb: "3rem",
+          textAlign: "center",
         }}
       >
         Green your Bitcoin
@@ -62,7 +65,7 @@ const Home: NextPage<HomeProps> = (props) => {
       {/* <Paragraph sx={{ pb: 20 }}>
         This is a demo, the calculations are not yet accurate
       </Paragraph> */}
-      <Paragraph sx={{ my: 20 }}>
+      <Paragraph sx={{ my: 20, textAlign: "center" }}>
         What is this? Read the{" "}
         <Link
           target={"_blank"}
@@ -73,96 +76,141 @@ const Home: NextPage<HomeProps> = (props) => {
         </Link>{" "}
         at resistance.money to learn more.
       </Paragraph>
-      <Paragraph>Your BTC holdings:</Paragraph>
-      <Flex sx={{ alignItems: "center", mb: 20 }}>
-        <Input
+      <Card sx={{ border: "1px solid grey", borderRadius: "10px", p: "20px" }}>
+        <Box
           sx={{
-            width: 200,
+            textAlign: "center",
+            flex: "0 0 50%",
+            borderBottom: "1px solid grey",
           }}
-          min={0}
-          max={props.totalSupply}
-          type="number"
-          value={btc}
-          onChange={(e) => setBtc(parseFloat(e.currentTarget.value))}
-        />
-        <Paragraph ml={10}>BTC</Paragraph>
-      </Flex>
-      <Flex sx={{ mb: 20 }}>
-        <Box sx={{ mr: 20 }}>
-          <Paragraph>Total BTC supply:</Paragraph>
-          <Paragraph>{props.totalSupply.toLocaleString()}</Paragraph>
+        >
+          <Paragraph>Enter your bitcoin holdings</Paragraph>
+
+          <Heading>
+            <Input
+              sx={{
+                width: "100%",
+                border: "0px",
+                ":focus": {
+                  outline: "0px",
+                },
+
+                display: "block",
+                textAlign: "center",
+                fontSize: "50px",
+                fontWeight: "bold",
+                p: 0,
+                m: 0,
+                mx: "auto",
+                mt: "5px",
+              }}
+              min={0}
+              max={props.totalSupply}
+              type="number"
+              value={btc}
+              onChange={(e) => setBtc(parseFloat(e.currentTarget.value))}
+            />
+          </Heading>
         </Box>
-        <Box>
-          <Paragraph>Coins assumed lost:</Paragraph>
-          <Paragraph>{lostCoins.toLocaleString()}</Paragraph>
+        <Box sx={{ mt: "20px", textAlign: "center" }}>
+          <Paragraph>{btc.toLocaleString()} btc incentivises</Paragraph>
+          <Heading>
+            <b>{hashRateToMine.toLocaleString()}</b>
+            <small>TH/s of mining</small>
+          </Heading>
+          <Paragraph>
+            Or {Math.round(s19Count).toLocaleString()} Antminer s19 Pros at{" "}
+            {s19Hashrate} TH/s
+          </Paragraph>
         </Box>
-      </Flex>
-      <Paragraph>Effective total BTC supply:</Paragraph>
-      <Heading sx={{ mb: 20 }}>{effectiveTotal.toLocaleString()}</Heading>
-      <Paragraph>Of which you hold:</Paragraph>
-      <Heading sx={{ mb: 20 }}>
-        <b>{percentOfSupply}%</b>
+      </Card>
+
+      <Heading sx={{ textAlign: "center", mt: "20px" }}>
+        How is this calculated?
       </Heading>
 
-      <Paragraph>3 month average global hashrate:</Paragraph>
-      <Heading>{props.hashRate.toLocaleString()} TH/s</Heading>
-      <Paragraph sx={{ mt: 20 }}>Your holdings incentivise:</Paragraph>
-      <Heading>
-        <b>{hashRateToMine.toLocaleString()}</b> TH/s
-      </Heading>
-      <Paragraph>
-        Or {Math.round(s19Count).toLocaleString()} Antminer s19 Pros at{" "}
-        {s19Hashrate} TH/s
-      </Paragraph>
-      <Paragraph sx={{ mt: 20 }}>
-        To ensure your BTC holdings are carbon neutral you can mine this amount
-        or more with renewable energy, or purchase an equivalent Green
-        Co-investment (GCI) instrument.
-      </Paragraph>
-      <Paragraph sx={{ fontSize: 1, mt: 30 }}>
-        Hashrate from{" "}
-        <Link
-          target={"_blank"}
-          rel="noreferrer"
-          href="http://twitter.com/glassnode"
-        >
-          @glassnode
-        </Link>
-        <br />
-        Built by{" "}
-        <Link
-          target={"_blank"}
-          rel="noreferrer"
-          href="http://twitter.com/islandHODL"
-        >
-          @islandHODL
-        </Link>
-        <br />
-        Inspired by{" "}
-        <Link
-          target={"_blank"}
-          rel="noreferrer"
-          href="https://twitter.com/thetrocro"
-        >
-          Troy Cross
-        </Link>{" "}
-        &amp;{" "}
-        <Link
-          target={"_blank"}
-          rel="noreferrer"
-          href="https://twitter.com/resistancemoney"
-        >
-          Andrew M. Bailey
-        </Link>{" "}
-        at{" "}
-        <Link
-          target={"_blank"}
-          rel="noreferrer"
-          href="https://www.resistance.money/green/"
-        >
-          Resistance.money
-        </Link>
-      </Paragraph>
+      <Box sx={{ textAlign: "center" }}>
+        <Paragraph>
+          Given a total BTC supply of{" "}
+          <b>{props.totalSupply.toLocaleString()}</b> btc
+          <br />
+          and if we assume <b>{lostCoins.toLocaleString()}</b> btc to be lost.
+          <br />
+          This leaves an effective total supply of
+        </Paragraph>
+        <Heading>
+          {effectiveTotal.toLocaleString()} <small>btc</small>
+        </Heading>
+        <Paragraph>of which you hold:</Paragraph>
+        <Heading sx={{ mb: 20 }}>
+          <b>{percentOfSupply}%</b>
+        </Heading>
+
+        <Paragraph>
+          Applying this percentage to the 3 month average global hashrate of:
+        </Paragraph>
+        <Heading>{props.hashRate.toLocaleString()} TH/s</Heading>
+        <Paragraph sx={{ mt: 20 }}>
+          gives us the hashrate that your holdings incentivise:
+        </Paragraph>
+        <Heading>
+          <b>{hashRateToMine.toLocaleString()}</b> TH/s
+        </Heading>
+        <Paragraph>
+          Or {Math.round(s19Count).toLocaleString()} Antminer s19 Pros at{" "}
+          {s19Hashrate} TH/s
+        </Paragraph>
+        <Paragraph sx={{ mt: 20 }}>
+          To ensure your BTC holdings are carbon neutral you can mine this
+          amount or more with renewable energy, or purchase an equivalent Green
+          Co-investment (GCI) instrument.
+        </Paragraph>
+
+        <Paragraph sx={{ fontSize: 1, mt: 30 }}>
+          Hashrate from{" "}
+          <Link
+            target={"_blank"}
+            rel="noreferrer"
+            href="http://twitter.com/glassnode"
+          >
+            @glassnode
+          </Link>
+          <br />
+          Built by{" "}
+          <Link
+            target={"_blank"}
+            rel="noreferrer"
+            href="http://twitter.com/islandHODL"
+          >
+            @islandHODL
+          </Link>
+          <br />
+          Inspired by{" "}
+          <Link
+            target={"_blank"}
+            rel="noreferrer"
+            href="https://twitter.com/thetrocro"
+          >
+            Troy Cross
+          </Link>{" "}
+          &amp;{" "}
+          <Link
+            target={"_blank"}
+            rel="noreferrer"
+            href="https://twitter.com/resistancemoney"
+          >
+            Andrew M. Bailey
+          </Link>{" "}
+          at{" "}
+          <Link
+            target={"_blank"}
+            rel="noreferrer"
+            href="https://www.resistance.money/green/"
+          >
+            Resistance.money
+          </Link>
+        </Paragraph>
+      </Box>
     </>
   );
 };
