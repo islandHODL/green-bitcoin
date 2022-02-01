@@ -1,3 +1,7 @@
+### Green your Bitcoin
+
+A simple way to calculate the renewable mining you can do to offset the carbon footprint of your bitcoin holdings. Based on the green co-investment instrument idea by [Troy Cross](https://twitter.com/thetrocro) and [Andrew M. Bailey](https://twitter.com/resistancemoney). Read their [white paper here](https://www.resistance.money/green/).
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
