@@ -1,4 +1,4 @@
-import { addMonths } from "date-fns";
+import { addDays, addMonths } from "date-fns";
 
 const API_KEY = process.env.GLASSNODE_API_KEY;
 
@@ -48,8 +48,8 @@ export const fetchHashRate = async () => {
 
 export const fetchTotalSupply = async () => {
   const results = await glassnodeFetcher("/metrics/supply/current", {
-    // i: "1h",
-    // s: Math.round(new Date().getTime() / 1000).toString(),
+    i: "24h",
+    s: Math.round(addDays(new Date(), -2).getTime() / 1000).toString(),
   });
 
   // console.log("totalSup", results);
