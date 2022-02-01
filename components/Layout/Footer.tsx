@@ -5,24 +5,20 @@ type Props = {};
 
 const Footer = (props: Props) => {
   return (
-    <Box>
+    <Box sx={{ textAlign: "center", mt: 30 }}>
+      <Paragraph>Feedback welcome</Paragraph>
+      <Paragraph>
+        This is an experimental calculator contact any of us on twitter below
+        with your comments.
+      </Paragraph>
       <Paragraph sx={{ fontSize: 1, mt: 30 }}>
-        Hashrate from{" "}
-        <Link
-          target={"_blank"}
-          rel="noreferrer"
-          href="http://twitter.com/glassnode"
-        >
-          @glassnode
-        </Link>
-        <br />
         Built by{" "}
         <Link
           target={"_blank"}
           rel="noreferrer"
-          href="http://twitter.com/islandHODL"
+          href="http://twitter.com/islandhodl"
         >
-          @islandHODL
+          IslandHODL
         </Link>
         <br />
         Inspired by{" "}
@@ -48,6 +44,15 @@ const Footer = (props: Props) => {
           href="https://www.resistance.money/green/"
         >
           Resistance.money
+        </Link>
+        <br />
+        Hashrate and total supply from{" "}
+        <Link
+          target={"_blank"}
+          rel="noreferrer"
+          href="http://twitter.com/glassnode"
+        >
+          @glassnode
         </Link>
       </Paragraph>
     </Box>
