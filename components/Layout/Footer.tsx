@@ -7,18 +7,27 @@ const Footer = (props: Props) => {
   return (
     <Box sx={{ textAlign: "center", mt: 30 }}>
       <Paragraph>Feedback welcome</Paragraph>
-      <Paragraph>
-        This is an experimental calculator contact any of us on twitter below
-        with your comments.
-      </Paragraph>
       <Paragraph sx={{ fontSize: 1, mt: 30 }}>
-        Built by{" "}
+        This is an experimental calculator contact any of us on twitter or
+        github with your comments.
+      </Paragraph>
+      <Paragraph sx={{ fontSize: 1, mt: 30 }}></Paragraph>
+      <Paragraph sx={{ fontSize: 1, mt: 30 }}>
+        Built by IslandHODL{" "}
         <Link
           target={"_blank"}
           rel="noreferrer"
           href="http://twitter.com/islandhodl"
         >
-          IslandHODL
+          Twitter
+        </Link>{" "}
+        /{" "}
+        <Link
+          target={"_blank"}
+          rel="noreferrer"
+          href="https://github.com/islandHODL/green-bitcoin"
+        >
+          Github
         </Link>
         <br />
         Inspired by{" "}
