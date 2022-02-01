@@ -25,8 +25,9 @@ async function glassnodeFetcher(endpoint: string, params: any) {
 
   console.log(url.toString());
   const response = await fetch(url.toString());
-  console.log(response.json());
-  return (await response.json()) as GlassNodeReturnItem[];
+  const res = (await response.json()) as GlassNodeReturnItem[];
+  console.log(res);
+  return res;
 }
 
 const getAverageHashRate = (hashHistory: GlassNodeReturnItem[]): number => {
@@ -47,9 +48,11 @@ export const fetchHashRate = async () => {
 
 export const fetchTotalSupply = async () => {
   const results = await glassnodeFetcher("/metrics/supply/current", {
-    i: "1month",
-    s: Math.round(new Date().getTime() / 1000).toString(),
+    // i: "1h",
+    // s: Math.round(new Date().getTime() / 1000).toString(),
   });
 
-  return results[0].v;
+  // console.log("totalSup", results);
+
+  return results && results.length ? results[results.length - 1].v : 0;
 };
