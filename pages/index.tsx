@@ -5,11 +5,13 @@ import Calculator from "../components/Calculator/Calculator";
 import {
   fetchHashRate,
   fetchTotalSupply,
+  fetchUSDPrice,
 } from "../utils/glassnode/glassNodeFetcher";
 
 type HomeProps = {
   hashRate: number;
   totalSupply: number;
+  usdPrice: number;
 };
 
 const Home: NextPage<HomeProps> = (props) => {
@@ -31,11 +33,13 @@ const Home: NextPage<HomeProps> = (props) => {
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   const hashRate = await fetchHashRate();
   const totalSupply = await fetchTotalSupply();
-
+  const usdPrice = await fetchUSDPrice();
+  console.log(usdPrice);
   return {
     props: {
       hashRate,
       totalSupply,
+      usdPrice,
     },
     revalidate: 20,
   };
