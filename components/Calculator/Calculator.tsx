@@ -37,8 +37,8 @@ const { formatNumber: formatBitcoin } = localNumber("en-US", {
 const { formatNumber: formatS19 } = localNumber("en-US", {
   // style:"un",
   // currency: "BTC",
-  minimumFractionDigits: 1,
-  maximumFractionDigits: 1,
+  minimumFractionDigits: 0,
+  maximumFractionDigits: 2,
   // currencyDisplay: "symbol",
 });
 
@@ -144,8 +144,7 @@ function Calculator(props: Props) {
             <small>TH/s of mining</small>
           </Heading>
           <Paragraph>
-            Or {Math.round(s19Count).toLocaleString()} Antminer s19 Pros at{" "}
-            {s19Hashrate} TH/s
+            Or {formatS19(s19Count)} Antminer s19 Pros at {s19Hashrate} TH/s
           </Paragraph>
         </Box>
       </Card>
