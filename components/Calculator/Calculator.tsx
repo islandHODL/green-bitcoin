@@ -34,6 +34,14 @@ const { formatNumber: formatBitcoin } = localNumber("en-US", {
   currencyDisplay: "symbol",
 });
 
+const { formatNumber: formatS19 } = localNumber("en-US", {
+  // style:"un",
+  // currency: "BTC",
+  minimumFractionDigits: 1,
+  maximumFractionDigits: 1,
+  // currencyDisplay: "symbol",
+});
+
 function Calculator(props: Props) {
   const [btc, setBtc] = useState(100);
 
@@ -171,8 +179,7 @@ function Calculator(props: Props) {
           <b>{hashRateToMine.toLocaleString()}</b> TH/s
         </Heading>
         <Paragraph>
-          Or {Math.round(s19Count).toLocaleString()} Antminer s19 Pros at{" "}
-          {s19Hashrate} TH/s
+          Or {formatS19(s19Count)} Antminer s19 Pros at {s19Hashrate} TH/s
         </Paragraph>
         <Paragraph sx={{ mt: 20 }}>
           To ensure your BTC holdings are carbon neutral you can mine this
