@@ -61,7 +61,7 @@ function Calculator(props: Props) {
       <Card sx={{ border: "1px solid grey", borderRadius: "10px", p: "20px" }}>
         <Paragraph sx={{ textAlign: "center" }}>Select currency</Paragraph>
         <Paragraph sx={{ textAlign: "center" }}>
-          (1 BTC = ${formatDollars(props.usdPrice)})
+          (1 BTC = {formatDollars(props.usdPrice)})
         </Paragraph>
         <Flex
           sx={{
