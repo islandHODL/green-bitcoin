@@ -1,19 +1,6 @@
 import React from "react";
 import { Heading, Link, Paragraph } from "theme-ui";
 
-import {
-  TwitterTimelineEmbed,
-  TwitterShareButton,
-  TwitterFollowButton,
-  TwitterHashtagButton,
-  TwitterMentionButton,
-  TwitterTweetEmbed,
-  TwitterMomentShare,
-  TwitterDMButton,
-  TwitterVideoEmbed,
-  TwitterOnAirButton,
-} from "react-twitter-embed";
-
 type Props = {};
 
 function Header({}: Props) {
@@ -72,7 +59,7 @@ function Header({}: Props) {
           rel="noreferrer"
           href="https://theprogressivebitcoiner.com/episode-5-bitcoin-philosophy-and-greening-bitcoin-with-incentive-offsets/"
         >
-          The progressive bitcoiner
+          The Progressive Bitcoiner
         </Link>{" "}
         - Mark Stephany
         <br />
