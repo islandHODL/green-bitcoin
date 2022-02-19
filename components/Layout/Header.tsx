@@ -1,6 +1,19 @@
 import React from "react";
 import { Heading, Link, Paragraph } from "theme-ui";
 
+import {
+  TwitterTimelineEmbed,
+  TwitterShareButton,
+  TwitterFollowButton,
+  TwitterHashtagButton,
+  TwitterMentionButton,
+  TwitterTweetEmbed,
+  TwitterMomentShare,
+  TwitterDMButton,
+  TwitterVideoEmbed,
+  TwitterOnAirButton,
+} from "react-twitter-embed";
+
 type Props = {};
 
 function Header({}: Props) {
@@ -19,7 +32,20 @@ function Header({}: Props) {
         Green your Bitcoin
       </Heading>
       <Paragraph sx={{ my: 20, textAlign: "center" }}>
-        What is this? Read the{" "}
+        Bitcoin mining is incentivised by Bitcoin having value. Holding and not
+        selling Bitcoin creates that value. If you hold X% of available Bitcoin
+        you are incentivising X% of total mining.
+        <br />
+        <br />
+        Below is a simple calculator that takes your Bitcoin holdings and works
+        out the % of Bitcoin mining you incentivise. If you subsidise that
+        amount of green mining, your Bitcoin will be carbon neutral.
+        <br />
+        <br />
+        <b>Want to know more?</b>
+        <br />
+        <br />
+        Read the{" "}
         <Link
           target={"_blank"}
           rel="noreferrer"
@@ -27,7 +53,37 @@ function Header({}: Props) {
         >
           white paper
         </Link>{" "}
-        at resistance.money to learn more.
+        at resistance.money.
+        <br />
+        <br />
+        Listen to Troy Cross and Andrew Bailey explain it on:
+        <br />
+        <Link
+          target={"_blank"}
+          rel="noreferrer"
+          href="https://smartpeopleshit.buzzsprout.com/1758058/9862508-ep47-hash-credits-green-mining-and-15-trillion-unlocked-from-esg-troy-cross"
+        >
+          Smart People Shit
+        </Link>{" "}
+        - Dennis Porter
+        <br />
+        <Link
+          target={"_blank"}
+          rel="noreferrer"
+          href="https://theprogressivebitcoiner.com/episode-5-bitcoin-philosophy-and-greening-bitcoin-with-incentive-offsets/"
+        >
+          The progressive bitcoiner
+        </Link>{" "}
+        - Mark Stephany
+        <br />
+        <Link
+          target={"_blank"}
+          rel="noreferrer"
+          href="https://www.whatbitcoindid.com/podcast/can-bitcoin-mining-save-the-environment"
+        >
+          What Bitcoin Did
+        </Link>{" "}
+        - Peter McCormack
       </Paragraph>
     </>
   );
