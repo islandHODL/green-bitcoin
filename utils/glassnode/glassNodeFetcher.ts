@@ -18,15 +18,15 @@ async function glassnodeFetcher(endpoint: string, params: any) {
     api_key: process.env.GLASSNODE_API_KEY,
   };
 
-  console.log(endpoint, fetchParams);
+  // console.log(endpoint, fetchParams);
 
   const url = new URL(`${API_URL_BASE}${endpoint}`);
   url.search = new URLSearchParams(fetchParams).toString();
 
-  console.log(url.toString());
+  // console.log(url.toString());
   const response = await fetch(url.toString());
   const res = (await response.json()) as GlassNodeReturnItem[];
-  console.log(res);
+  // console.log(res);
   return res;
 }
 
@@ -63,7 +63,7 @@ export const fetchUSDPrice = async () => {
     s: Math.round(addHours(new Date(), -3).getTime() / 1000).toString(),
   });
 
-  console.log("usdPrice", results);
+  // console.log("usdPrice", results);
 
   return results && results.length ? results[results.length - 1].v : 0;
 };

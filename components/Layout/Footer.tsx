@@ -66,7 +66,7 @@ const Footer = (props: Props) => {
       </Paragraph>
 
       <Heading sx={{ fontSize: "16px" }} mt="20px">
-        A note on privacy and 'Vercel Insights'
+        A note on privacy and &lsquo;Vercel Insights&rsquo;
       </Heading>
 
       <Paragraph sx={{ fontSize: "12px" }} my="20px">
@@ -79,9 +79,9 @@ const Footer = (props: Props) => {
           Vercel
         </Link>
         , who provide continous integration and a very easy developer
-        experience. Some visitors noted the api call to vercel-insights.com in
-        the developer tab. These insights simply store the time it took to load
-        the website. There is no other data stored or collected and I can't
+        experience. One visitor noted the api call to vercel-insights.com in the
+        developer tab. These insights simply store the time it took to load the
+        website. There is no other data stored or collected and I can&rsquo;t
         switch them off.
         <br />
         <br />
