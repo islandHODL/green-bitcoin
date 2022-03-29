@@ -43,7 +43,23 @@ function Header({}: Props) {
         at resistance.money.
         <br />
         <br />
-        Listen to Troy Cross and Andrew Bailey explain it on:
+        Listen to{" "}
+        <Link
+          target={"_blank"}
+          rel="noreferrer"
+          href="https://twitter.com/thetrocro"
+        >
+          Troy Cross
+        </Link>{" "}
+        &amp;{" "}
+        <Link
+          target={"_blank"}
+          rel="noreferrer"
+          href="https://twitter.com/resistancemoney"
+        >
+          Andrew M. Bailey
+        </Link>{" "}
+        explain it on:
         <br />
         <Link
           target={"_blank"}
