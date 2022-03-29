@@ -34,7 +34,6 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   const hashRate = await fetchHashRate();
   const totalSupply = await fetchTotalSupply();
   const usdPrice = await fetchUSDPrice();
-  console.log(usdPrice);
   return {
     props: {
       hashRate,
