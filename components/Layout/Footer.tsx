@@ -65,9 +65,11 @@ const Footer = (props: Props) => {
         </Link>
       </Paragraph>
 
-      <Heading mt="20px">A note on privacy and 'Vercel Insights'</Heading>
+      <Heading sx={{ fontSize: "16px" }} mt="20px">
+        A note on privacy and 'Vercel Insights'
+      </Heading>
 
-      <Paragraph my="20px">
+      <Paragraph sx={{ fontSize: "12px" }} my="20px">
         There is no data collected by this webpage, the numbers you put into the
         calculator are not stored anywhere.
         <br />
