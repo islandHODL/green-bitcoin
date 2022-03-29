@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Paragraph, Link } from "theme-ui";
+import { Box, Paragraph, Link, Heading } from "theme-ui";
 
 type Props = {};
 
@@ -63,6 +63,35 @@ const Footer = (props: Props) => {
         >
           @glassnode
         </Link>
+      </Paragraph>
+
+      <Heading mt="20px">A note on privacy and 'Vercel Insights'</Heading>
+
+      <Paragraph my="20px">
+        There is no data collected by this webpage, the numbers you put into the
+        calculator are not stored anywhere.
+        <br />
+        <br />
+        The calculator is currently hosted for free by{" "}
+        <Link target={"_blank"} rel="noreferrer" href="https://vercel.com/">
+          Vercel
+        </Link>
+        , who provide continous integration and a very easy developer
+        experience. Some visitors noted the api call to vercel-insights.com in
+        the developer tab. These insights simply store the time it took to load
+        the website. There is no other data stored or collected and I can't
+        switch them off.
+        <br />
+        <br />
+        See this{" "}
+        <Link
+          target={"_blank"}
+          rel="noreferrer"
+          href="https://twitter.com/IslandHodl/status/1508819554796982273?s=20&t=T70MqaVhgtzIF9meN7PBJQ"
+        >
+          twitter thread
+        </Link>{" "}
+        for more details.
       </Paragraph>
     </Box>
   );
