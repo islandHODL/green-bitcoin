@@ -2,7 +2,7 @@
   "name": "green-bitcoin-nextjs",
   "private": true,
   "license": "MIT",
-  "version": "0.3.8",
+  "version": "0.3.9",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
