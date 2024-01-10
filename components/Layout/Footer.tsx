@@ -59,9 +59,9 @@ const Footer = (props: Props) => {
         <Link
           target={"_blank"}
           rel="noreferrer"
-          href="http://twitter.com/glassnode"
+          href="https://www.blockchain.com/"
         >
-          @glassnode
+          Blockchain.com
         </Link>
       </Paragraph>
 
