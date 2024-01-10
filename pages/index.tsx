@@ -3,6 +3,7 @@ import { GetStaticProps } from "next";
 import Head from "next/head";
 import Calculator from "../components/Calculator/Calculator";
 import {
+  blockchainFetcher,
   fetchHashRate,
   fetchTotalSupply,
   fetchUSDPrice,
@@ -31,9 +32,12 @@ const Home: NextPage<HomeProps> = (props) => {
   );
 };
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
-  const hashRate = await fetchHashRate();
-  const totalSupply = await fetchTotalSupply();
-  const usdPrice = await fetchUSDPrice();
+  const info = await blockchainFetcher();
+
+  const hashRate = (info?.hash_rate || 0) / 1000;
+  const totalSupply = (info?.totalbc || 0) / 100000000; //await fetchTotalSupply();
+  const usdPrice = info?.market_price_usd || 0; //await fetchUSDPrice();
+  console.log("getStaticProps", { hashRate, totalSupply, usdPrice });
   return {
     props: {
       hashRate,

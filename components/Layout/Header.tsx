@@ -1,5 +1,6 @@
+import Image from "next/image";
 import React from "react";
-import { Heading, Link, Paragraph } from "theme-ui";
+import { Box, Heading, Link, Paragraph } from "theme-ui";
 
 type Props = {};
 
@@ -18,6 +19,21 @@ function Header({}: Props) {
       >
         Green your Bitcoin
       </Heading>
+      <Box
+        sx={{
+          height: "400px",
+          overflow: "hidden",
+          position: "relative",
+        }}
+      >
+        <Image
+          alt="Calculator"
+          title="Calculator"
+          src={"/calc2.png"}
+          layout="fill"
+          objectFit="contain"
+        />
+      </Box>
       <Paragraph sx={{ my: 20, textAlign: "center" }}>
         Bitcoin mining is incentivised by Bitcoin having value. Holding and not
         selling Bitcoin creates that value. If you hold X% of available Bitcoin
@@ -60,7 +76,7 @@ function Header({}: Props) {
           Andrew M. Bailey
         </Link>{" "}
         explain it on:
-        <br />
+        {/* <br />
         <Link
           target={"_blank"}
           rel="noreferrer"
@@ -68,7 +84,7 @@ function Header({}: Props) {
         >
           Smart People Shit
         </Link>{" "}
-        - Dennis Porter
+        - Dennis Porter */}
         <br />
         <Link
           target={"_blank"}
@@ -77,7 +93,7 @@ function Header({}: Props) {
         >
           The Progressive Bitcoiner
         </Link>{" "}
-        - Mark Stephany
+        Podcast
         <br />
         <Link
           target={"_blank"}
