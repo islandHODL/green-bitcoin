@@ -168,7 +168,7 @@ function Calculator(props: Props) {
         </Heading>
 
         <Paragraph>
-          Applying this percentage to the 3 month average global hashrate of:
+          Applying this percentage to the average global hashrate of:
         </Paragraph>
         <Heading>{props.hashRate.toLocaleString()} TH/s</Heading>
         <Paragraph sx={{ mt: 20 }}>
